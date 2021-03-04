@@ -10,7 +10,6 @@ CLIB_PATH=$(cd $WEB_CAPTURE_PATH/clib/; pwd)
 
 TOTAL_MEMORY=33554432
 
-
 rm -rf $WEB_CAPTURE_PATH/wasm_d
 
 mkdir $WEB_CAPTURE_PATH/wasm_d
@@ -23,7 +22,7 @@ emcc $CLIB_PATH/decoder.c $FFMPEG_PATH/lib/libavformat.a $FFMPEG_PATH/lib/libavc
     -s EXPORTED_FUNCTIONS='["_init", "_free", "_decode", "_destroy"]' \
     -s ASSERTIONS=0 \
     -s ALLOW_MEMORY_GROWTH=1 \
-    -s MAXIMUM_MEMORY=1GB \
+    -s MAXIMUM_MEMORY=200MB \
     -s ENVIRONMENT=node \
     -o $WEB_CAPTURE_PATH/wasm_d/decoder.js
 

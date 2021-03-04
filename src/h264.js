@@ -34,7 +34,7 @@ Module.onRuntimeInitialized = () => {
             current++;
 
             const chunk = buffer.slice(start, end);
-            console.log('send', current, chunk);
+            console.log('send', current, chunk[4] & 0x1f, chunk);
 
             const chunkPtr = Module._malloc(chunk.length);
 
@@ -51,11 +51,11 @@ Module.onRuntimeInitialized = () => {
             Module._free(imgDataPtr);
             Module._free(imageBufferPtr);
 
-            const imgInfo = { width, height, imageBuffer };
-
-            const path = `src/ppm/${current}.ppm`;
-            fs.writeFileSync(path, `P6\n${width} ${height}\n225\n`);
-            fs.appendFileSync(path, imageBuffer);
+            if (width > 0 && height > 0) {
+                const path = `src/ppm/${current}.ppm`;
+                fs.writeFileSync(path, `P6\n${width} ${height}\n225\n`);
+                fs.appendFileSync(path, imageBuffer);
+            }
 
             // console.log('ok', imgInfo);
 
