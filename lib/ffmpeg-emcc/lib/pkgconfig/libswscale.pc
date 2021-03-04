@@ -1,7 +1,7 @@
-prefix=/data/web-capture/lib/ffmpeg-emcc
+prefix=/mnt/e/code_project/Test/web-capture/lib/ffmpeg-emcc
 exec_prefix=${prefix}
-libdir=/data/web-capture/lib/ffmpeg-emcc/lib
-includedir=/data/web-capture/lib/ffmpeg-emcc/include
+libdir=/mnt/e/code_project/Test/web-capture/lib/ffmpeg-emcc/lib
+includedir=/mnt/e/code_project/Test/web-capture/lib/ffmpeg-emcc/include
 
 Name: libswscale
 Description: FFmpeg image rescaling library

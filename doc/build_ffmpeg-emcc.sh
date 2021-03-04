@@ -4,9 +4,8 @@ NOW_PATH=$(cd $(dirname $0); pwd)
 
 WEB_CAPTURE_PATH=$(cd $NOW_PATH/../; pwd)
 
-FFMPEG_PATH=$(cd $WEB_CAPTURE_PATH/../ffmpeg-3.4.8; pwd)
+FFMPEG_PATH=$(cd $WEB_CAPTURE_PATH/ffmpeg-3.4.8; pwd)
 
-source $WEB_CAPTURE_PATH/../emsdk/emsdk_env.sh
 
 rm -rf  $WEB_CAPTURE_PATH/lib/ffmpeg-emcc
 
@@ -26,6 +25,8 @@ emconfigure ./configure \
     --arch=x86_32 \
     --enable-gpl \
     --enable-version3 \
+    --enable-small \
+    --disable-avdevice \
     --enable-cross-compile \
     --disable-logging \
     --disable-programs \
@@ -42,21 +43,21 @@ emconfigure ./configure \
     --disable-os2threads \
     --disable-network \
     --disable-everything \
-    --enable-protocol=file \
-    --enable-demuxer=mov \
-    --enable-demuxer=matroska \
-    --enable-demuxer=flv \
-    --enable-demuxer=avi \
+    --disable-protocol=file \
+    --disable-demuxer=mov \
+    --disable-demuxer=matroska \
+    --disable-demuxer=flv \
+    --disable-demuxer=avi \
     --enable-decoder=h264 \
-    --enable-decoder=hevc \
-    --enable-decoder=mpeg4 \
-    --enable-decoder=vp8 \
-    --enable-decoder=vp9 \
-    --enable-decoder=wmv3 \
+    --disable-decoder=hevc \
+    --disable-decoder=mpeg4 \
+    --disable-decoder=vp8 \
+    --disable-decoder=vp9 \
+    --disable-decoder=wmv3 \
     --disable-asm \
     --disable-debug \
 
-make
+make -j4
 
 make install
 

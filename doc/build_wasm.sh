@@ -10,7 +10,6 @@ CLIB_PATH=$(cd $WEB_CAPTURE_PATH/clib/; pwd)
 
 TOTAL_MEMORY=33554432
 
-source $WEB_CAPTURE_PATH/../emsdk/emsdk_env.sh
 
 rm -rf $WEB_CAPTURE_PATH/wasm
 
