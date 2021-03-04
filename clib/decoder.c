@@ -1,12 +1,12 @@
 #include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
 #include <libavutil/imgutils.h>
 #include <libswscale/swscale.h>
 
-typedef struct {
-    uint32_t width;
-    uint32_t height;
-    uint8_t *data;
+typedef struct
+{
+  uint32_t width;
+  uint32_t height;
+  uint8_t *data;
 } ImageData;
 
 AVCodec *pCodec = NULL;

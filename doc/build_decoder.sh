@@ -14,7 +14,7 @@ rm -rf $WEB_CAPTURE_PATH/wasm_d
 
 mkdir $WEB_CAPTURE_PATH/wasm_d
 
-emcc $CLIB_PATH/decoder.c $FFMPEG_PATH/lib/libavformat.a $FFMPEG_PATH/lib/libavcodec.a $FFMPEG_PATH/lib/libswscale.a $FFMPEG_PATH/lib/libavutil.a \
+emcc $CLIB_PATH/decoder.c  $FFMPEG_PATH/lib/libavcodec.a $FFMPEG_PATH/lib/libswscale.a $FFMPEG_PATH/lib/libavutil.a \
     -O3 \
     -I "$FFMPEG_PATH/include" \
     -s WASM=1 \

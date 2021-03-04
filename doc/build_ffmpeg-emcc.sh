@@ -4,7 +4,8 @@ NOW_PATH=$(cd $(dirname $0); pwd)
 
 WEB_CAPTURE_PATH=$(cd $NOW_PATH/../; pwd)
 
-FFMPEG_PATH=$(cd $WEB_CAPTURE_PATH/../ffmpeg-3.4.8; pwd)
+FFMPEG_PATH=$(cd $WEB_CAPTURE_PATH/ffmpeg-4.3.2; pwd)
+
 
 rm -rf  $WEB_CAPTURE_PATH/lib/ffmpeg-emcc
 
@@ -32,7 +33,6 @@ emconfigure ./configure \
     --disable-ffmpeg \
     --disable-ffplay \
     --disable-ffprobe \
-    --disable-ffserver \
     --disable-doc \
     --disable-swresample \
     --disable-postproc  \
@@ -42,19 +42,17 @@ emconfigure ./configure \
     --disable-os2threads \
     --disable-network \
     --disable-everything \
-    --disable-protocol=file \
-    --disable-demuxer=mov \
-    --disable-demuxer=matroska \
-    --disable-demuxer=flv \
-    --disable-demuxer=avi \
+    --disable-protocols \
+    --disable-demuxers \
+    --disable-decoders \
     --enable-decoder=h264 \
-    --disable-decoder=hevc \
-    --disable-decoder=mpeg4 \
-    --disable-decoder=vp8 \
-    --disable-decoder=vp9 \
-    --disable-decoder=wmv3 \
     --disable-asm \
     --disable-debug \
+    --disable-avformat \
+    --disable-filters \
+    --disable-encoders \
+    --disable-parsers \
+    --enable-parser=h264
 
 make -j4
 
