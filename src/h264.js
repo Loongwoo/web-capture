@@ -20,7 +20,10 @@ console.info('read video finish byteLen: %d frames: %d', buffer.byteLength, chun
 Module.onRuntimeInitialized = () => {
     console.log('init wasm');
 
-    Module._init();
+    const buff = new Uint8Array([1]); // colorTransform
+    const buffPtr = Module._malloc(buff.length);
+    Module.HEAPU8.set(buff, buffPtr);
+    Module._init(buffPtr, buff.length);
 
     let start = 0;
     let end = 0;
@@ -44,12 +47,13 @@ Module.onRuntimeInitialized = () => {
 
             const width = Module.HEAPU32[imgDataPtr / 4],
                 height = Module.HEAPU32[imgDataPtr / 4 + 1],
-                imageBufferPtr = Module.HEAPU32[imgDataPtr / 4 + 2],
-                imageBuffer = Module.HEAPU8.subarray(imageBufferPtr, imageBufferPtr + width * height * 3);
+                length = Module.HEAPU32[imgDataPtr / 4 + 2],
+                imagePtr = Module.HEAPU32[imgDataPtr / 4 + 3],
+                imageBuffer = Module.HEAPU8.subarray(imagePtr, imagePtr + length);
 
             Module._free(chunkPtr);
             Module._free(imgDataPtr);
-            Module._free(imageBufferPtr);
+            Module._free(imagePtr);
 
             if (width > 0 && height > 0) {
                 const path = `src/ppm/${current}.ppm`;
@@ -57,9 +61,9 @@ Module.onRuntimeInitialized = () => {
                 fs.appendFileSync(path, imageBuffer);
             }
 
-            // console.log('ok', imgInfo);
-
             start = end;
         }
     }, 100);
+
+    Module._free(buffPtr);
 };
